@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/WY_Assets/WY_Scenes/TitleScene.unity
+    guid: 8e8986fbf25e12a42b079911f8fd2d36
+  - enabled: 1
+    path: Assets/WY_Assets/WY_Scenes/LobbyScene.unity
+    guid: 59eefab7e8b93a6418dc4216841f7a94
+  - enabled: 1
+    path: Assets/WY_Assets/WY_Scenes/MainMenuScene.unity
+    guid: 5277e240a77e5424f97c1e2c204712b6
+  - enabled: 1
+    path: Assets/LX_Assets/LXXCharacterSelectScene.unity
+    guid: 77895d03c41f0e048abc3335938f3607
+  - enabled: 0
+    path: Assets/WY_Assets/WY_Scenes/CharacterSelectScene.unity
+    guid: 263cb807dc530f44a855b9b9db1fa6bd
+  - enabled: 1
+    path: Assets/WY_Assets/WY_Scenes/LoadingScene.unity
+    guid: d2e24ce25c4ae9d44892025711dbc08a
+  - enabled: 0
+    path: Assets/WY_Assets/WY_Scenes/GameScene.unity
+    guid: f50a7ae6dbac773448b53859ff6f75ef
+  - enabled: 1
+    path: Assets/LX_Assets/LXGameScene.unity
+    guid: e24337903dbe74b478e449b202b5fa7e
+  m_configObjects: {}
