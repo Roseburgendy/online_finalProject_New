@@ -19,8 +19,7 @@ public class MainMenuUI : MonoBehaviour {
         });
         playSingleplayerButton.onClick.AddListener(() => {
             KitchenGameMultiplayer.playMultiplayer = false;
-
-            Loader.Load(Loader.Scene.LXXCharacterSelectScene);
+            Loader.Load(Loader.Scene.LobbyScene);
 
         });
         backButton.onClick.AddListener(() => {
