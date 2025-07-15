@@ -18,7 +18,7 @@ public class PeriodicSinkRise : MonoBehaviour
     [Tooltip("SinkingDepth")]
     public float sinkDepth = 2.7f;
 
-    [Header("Audio (可选：局部 AudioSource 播放)")]
+    [Header("Audio ( AudioSource play)")]
     [SerializeField] private AudioSource localSource;       // 在 Inspector 拖入
     [SerializeField] private AudioClip deliverySuccessClip; // 在 Inspector 拖入 delivery_success.wav
 
@@ -81,7 +81,7 @@ public class PeriodicSinkRise : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        // 确保最终到位
+        
         transform.localPosition = to;
     }
 }
