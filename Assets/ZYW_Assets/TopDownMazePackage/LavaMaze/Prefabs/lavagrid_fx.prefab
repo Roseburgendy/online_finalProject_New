@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012387184800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lavagrid_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4000012658373748}
   - component: {fileID: 198000013788569460}
   - component: {fileID: 199000013103838724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lm_falling_lava_rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4718,7 +4718,7 @@ GameObject:
   - component: {fileID: 4000013298790288}
   - component: {fileID: 198000013652510002}
   - component: {fileID: 199000010643399790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: small_rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9492,7 +9492,7 @@ GameObject:
   - component: {fileID: 4000012409785228}
   - component: {fileID: 198000012154136680}
   - component: {fileID: 199000011816595750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14230,7 +14230,7 @@ GameObject:
   - component: {fileID: 4000014108974514}
   - component: {fileID: 198000013338569304}
   - component: {fileID: 199000010286568180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18838,7 +18838,7 @@ GameObject:
   - component: {fileID: 4000014214821784}
   - component: {fileID: 198000011474385840}
   - component: {fileID: 199000012749623896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lm_lava_flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23643,7 +23643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000010750546152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lava_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23682,7 +23682,7 @@ GameObject:
   - component: {fileID: 23000010450027442}
   - component: {fileID: 65000012480234018}
   - component: {fileID: 95000010560110500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lava_grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23807,7 +23807,7 @@ GameObject:
   - component: {fileID: 4000010050501452}
   - component: {fileID: 198000010497215054}
   - component: {fileID: 199000013568953818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fire_collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28623,7 +28623,7 @@ GameObject:
   - component: {fileID: 4000010062663868}
   - component: {fileID: 198000012324789040}
   - component: {fileID: 199000011202738442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lm_fire_sparkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33321,7 +33321,7 @@ GameObject:
   - component: {fileID: 4000010459426950}
   - component: {fileID: 198000012031417356}
   - component: {fileID: 199000013043684732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lm_lava_fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38068,7 +38068,7 @@ GameObject:
   - component: {fileID: 4000012332430880}
   - component: {fileID: 198000010314425020}
   - component: {fileID: 199000010973541998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fire_trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
