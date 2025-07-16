@@ -30,6 +30,7 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
+    public static event EventHandler OnAnyPlayerSpawned;
 
     private void Start()
     {
@@ -40,10 +41,8 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
             LocalInstance = this;
             GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
             GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+            OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
         }
-
-        // 设置玩家颜色可以按 player number 或 actorNumber 实现
-        //playerVisual.SetPlayerColor(PlayerColorManager.Instance.GetColor(PhotonNetwork.LocalPlayer.ActorNumber));
     }
 
     private void Update()
@@ -70,12 +69,14 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
         }
 
         float interactDistance = 2f;
+        // Detect the counter interactable
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask))
         {
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
                 if (baseCounter != selectedCounter)
                 {
+                    // Set selected counter
                     SetSelectedCounter(baseCounter);
                 }
             }
@@ -156,8 +157,7 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
             selectedCounter.InteractAlternate(this);
         }
     }
-
-    // IKitchenObjectParent 接口
+    
     public Transform GetKitchenObjectFollowTransform()
     {
         return kitchenObjectHoldPoint;

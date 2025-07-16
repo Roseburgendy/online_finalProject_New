@@ -1,70 +1,94 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
+using System;
 using UnityEngine;
+using Photon.Pun;
 
-public class KitchenObject : NetworkBehaviour {
+public class KitchenObject : MonoBehaviourPun {
 
-
+    // The ScriptableObject representing data for this kitchen object (e.g. tomato, plate, meat)
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-
+    // The object that currently holds this kitchen object (could be a player or a counter)
     private IKitchenObjectParent kitchenObjectParent;
+
+    // Component that keeps this object visually following its parent
     private FollowTransform followTransform;
 
-
     protected virtual void Awake() {
+        // Get the FollowTransform component used to visually follow the parent
         followTransform = GetComponent<FollowTransform>();
     }
 
+    // Returns the ScriptableObject data for this kitchen object
     public KitchenObjectSO GetKitchenObjectSO() {
         return kitchenObjectSO;
     }
 
-    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
-        //SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SetKitchenObjectParentServerRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference) {
-        SetKitchenObjectParentClientRpc(kitchenObjectParentNetworkObjectReference);
-    }
-
-    [ClientRpc]
-    private void SetKitchenObjectParentClientRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference) {
-        kitchenObjectParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
-        IKitchenObjectParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
-
-        if (this.kitchenObjectParent != null) {
-            this.kitchenObjectParent.ClearKitchenObject();
+    // Assigns a new parent (e.g. player) to this kitchen object
+    public void SetKitchenObjectParent(IKitchenObjectParent newParent) {
+        // If currently held by a parent, clear the previous reference
+        if (kitchenObjectParent != null) {
+            kitchenObjectParent.ClearKitchenObject();
         }
 
-        this.kitchenObjectParent = kitchenObjectParent;
+        kitchenObjectParent = newParent;
 
+        // Sanity check: log error if new parent already has a kitchen object
         if (kitchenObjectParent.HasKitchenObject()) {
             Debug.LogError("IKitchenObjectParent already has a KitchenObject!");
         }
 
+        // Set this object as the parent's held object
         kitchenObjectParent.SetKitchenObject(this);
 
+        // Make the object visually follow the new parent's designated hold point
+        followTransform.SetTargetTransform(kitchenObjectParent.GetKitchenObjectFollowTransform());
+
+        // Inform all other clients to also update this object’s parent
+        photonView.RPC(nameof(RPC_SetParent), RpcTarget.Others, ((MonoBehaviour)newParent).GetComponent<PhotonView>().ViewID);
+    }
+
+    // Called remotely to sync the parent object across clients
+    [PunRPC]
+    private void RPC_SetParent(int parentViewId) {
+        PhotonView parentView = PhotonView.Find(parentViewId);
+        if (parentView == null) {
+            Debug.LogWarning("Parent view not found.");
+            return;
+        }
+
+        // Clear current parent if set
+        if (kitchenObjectParent != null) {
+            kitchenObjectParent.ClearKitchenObject();
+        }
+
+        // Set and sync new parent
+        IKitchenObjectParent newParent = parentView.GetComponent<IKitchenObjectParent>();
+        kitchenObjectParent = newParent;
+        kitchenObjectParent.SetKitchenObject(this);
         followTransform.SetTargetTransform(kitchenObjectParent.GetKitchenObjectFollowTransform());
     }
 
+    // Returns the current parent of this kitchen object
     public IKitchenObjectParent GetKitchenObjectParent() {
         return kitchenObjectParent;
     }
 
+    // Destroys the object across the network (only the owning client can call this)
     public void DestroySelf() {
-        Destroy(gameObject);
+        if (photonView.IsMine) {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
+    // Clear reference on parent (used when object is destroyed)
     public void ClearKitchenObjectOnParent() {
-        kitchenObjectParent.ClearKitchenObject();
+        kitchenObjectParent?.ClearKitchenObject();
     }
 
+    // Tries to cast this object to a PlateKitchenObject if applicable
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject) {
-        if (this is PlateKitchenObject) {
-            plateKitchenObject = this as PlateKitchenObject;
+        if (this is PlateKitchenObject plate) {
+            plateKitchenObject = plate;
             return true;
         } else {
             plateKitchenObject = null;
@@ -72,14 +96,22 @@ public class KitchenObject : NetworkBehaviour {
         }
     }
 
-
-
+    // Static helper method to spawn a new kitchen object on the network
     public static void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
-        KitchenGameMultiplayer.Instance.SpawnKitchenObject(kitchenObjectSO, kitchenObjectParent);
+        // Note: prefab must be in a "Resources" folder for Photon to instantiate
+        GameObject kitchenObjectPrefab = kitchenObjectSO.prefab;
+        Transform followTarget = kitchenObjectParent.GetKitchenObjectFollowTransform();
+
+        // Spawn the object on the network
+        GameObject kitchenObjectInstance = PhotonNetwork.Instantiate(kitchenObjectPrefab.name, followTarget.position, Quaternion.identity);
+
+        // Set its parent immediately after instantiation
+        KitchenObject kitchenObject = kitchenObjectInstance.GetComponent<KitchenObject>();
+        kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
     }
 
+    // Static helper method to destroy the kitchen object
     public static void DestroyKitchenObject(KitchenObject kitchenObject) {
-        KitchenGameMultiplayer.Instance.DestroyKitchenObject(kitchenObject);
+        kitchenObject.DestroySelf();
     }
-
 }

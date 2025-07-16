@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1778288183289012027}
-  - component: {fileID: -7405110282824764395}
+  - component: {fileID: 495065039973235350}
   - component: {fileID: 2834930810448598238}
   - component: {fileID: 7090808205160057262}
+  - component: {fileID: 5558972251162380437}
   m_Layer: 0
   m_Name: Bread
   m_TagString: Untagged
@@ -35,19 +36,19 @@ Transform:
   - {fileID: 8148595781254472541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7405110282824764395
+--- !u!114 &495065039973235350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793094337483793349}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2905860414
+  GlobalObjectIdHash: 2200205533
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -81,6 +82,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f8782109bd454cb9a1edf70d76944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5558972251162380437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793094337483793349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &5043943327990543837
 PrefabInstance:
   m_ObjectHideFlags: 0

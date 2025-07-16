@@ -37,15 +37,14 @@ public class LXGameSceneManager : MonoBehaviourPunCallbacks
 
         int playerIndex = GetPlayerIndex();
         Vector3 spawnPosition = spawnPoints[playerIndex].position;
-
-        // 直接使用选择的角色名字生成角色（确保角色 prefab 放在 Resources 文件夹中）
+        
         PhotonNetwork.Instantiate(characterId, spawnPosition, Quaternion.identity);
     }
 
 
     public void RespawnPlayer()
     {
-        // 简单地复用 SpawnPlayer 方法
+
         SpawnPlayer();
     }
 
