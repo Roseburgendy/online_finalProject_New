@@ -29,3 +29,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2396a4ce4b783164cb45c811c1a7a263, type: 3}
   warning:
   - {fileID: 8300000, guid: 007e3e137200b8746abe26ee15c196ba, type: 3}
+  uiClick:
+  - {fileID: 8300000, guid: 677a794cfab7c2b42b10e926d782da6e, type: 3}
+  win:
+  - {fileID: 8300000, guid: f766333bb8127d7428c20268b6fd8413, type: 3}
