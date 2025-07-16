@@ -40,6 +40,9 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPC_SetCharacter
+  - RPC_AddIngredient
+  - RPC_SetParent
+  - RPC_UpdateState
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

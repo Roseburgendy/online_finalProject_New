@@ -12,7 +12,4 @@ public interface IKitchenObjectParent
     void ClearKitchenObject();
 
     bool HasKitchenObject();
-
-    // 删除这一行，因为你不再用 Unity Netcode
-    // NetworkObject GetNetworkObject(); 
 }

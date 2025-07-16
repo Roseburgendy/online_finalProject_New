@@ -1,7 +1,8 @@
 ﻿using System;
+using Photon.Pun;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour, IKitchenObjectParent
+public class BaseCounter : MonoBehaviourPun, IKitchenObjectParent
 {
 
     public static event EventHandler OnAnyObjectPlacedHere;
@@ -14,8 +15,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private Transform counterTopPoint;
 
     private KitchenObject kitchenObject;
-
-    // 参数改为接口类型，支持你的 PJR_PlayerMovement 传 this
+    
     public virtual void Interact(IKitchenObjectParent player)
     {
         Debug.Log("BaseCounter.Interact() called.");
