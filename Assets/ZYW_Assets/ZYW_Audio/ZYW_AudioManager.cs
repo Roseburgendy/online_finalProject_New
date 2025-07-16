@@ -22,6 +22,10 @@ public class AudioManager : MonoBehaviour
         sfxSource.playOnAwake = false;
     }
 
+    public void PlayCountdown()
+    {
+        PlayRandom(audioClips.countdown);
+    }
     public void PlayChop()
     {
         PlayRandom(audioClips.chop);
@@ -63,6 +67,10 @@ public class AudioManager : MonoBehaviour
     public void PlayUIClick()
     {
         PlayRandom(audioClips.uiClick);
+    }
+    public void PlayWin()
+    {
+        PlayRandom(audioClips.win);
     }
 
     private void PlayRandom(AudioClip[] arr)
