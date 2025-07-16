@@ -6,7 +6,7 @@ using UnityEngine;
 public class KitchenObjectSO : ScriptableObject {
 
 
-    public Transform prefab;
+    public GameObject prefab;
     public Sprite sprite;
     public string objectName;
 

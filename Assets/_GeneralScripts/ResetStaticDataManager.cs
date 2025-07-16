@@ -9,7 +9,7 @@ public class ResetStaticDataManager : MonoBehaviour {
         CuttingCounter.ResetStaticData();
         BaseCounter.ResetStaticData();
         TrashCounter.ResetStaticData();
-        KitchenPlayer.ResetStaticData();
+       // KitchenPlayer.ResetStaticData();
     }
 
 }
