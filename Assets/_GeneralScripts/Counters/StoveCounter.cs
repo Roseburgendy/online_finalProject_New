@@ -39,7 +39,7 @@ public class StoveCounter : BaseCounter, IHasProgress
     private void Update()
     {
         // Only the MasterClient controls the frying/burning logic
-        if (!PhotonNetwork.IsMasterClient) return;
+        //if (!PhotonNetwork.IsMasterClient) return;
 
         if (HasKitchenObject())
         {
