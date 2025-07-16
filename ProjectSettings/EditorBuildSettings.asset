@@ -17,15 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LX_Assets/LXXCharacterSelectScene.unity
     guid: 77895d03c41f0e048abc3335938f3607
-  - enabled: 0
-    path: Assets/WY_Assets/WY_Scenes/CharacterSelectScene.unity
-    guid: 263cb807dc530f44a855b9b9db1fa6bd
   - enabled: 1
     path: Assets/WY_Assets/WY_Scenes/LoadingScene.unity
     guid: d2e24ce25c4ae9d44892025711dbc08a
-  - enabled: 0
-    path: Assets/WY_Assets/WY_Scenes/GameScene.unity
-    guid: f50a7ae6dbac773448b53859ff6f75ef
   - enabled: 1
     path: Assets/LX_Assets/LXGameScene.unity
     guid: e24337903dbe74b478e449b202b5fa7e

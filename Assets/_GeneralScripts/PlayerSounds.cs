@@ -8,8 +8,7 @@ public class PlayerSounds : MonoBehaviour {
     private KitchenPlayer  player;
     private float footstepTimer;
     private float footstepTimerMax = .1f;
-
-
+    
     private void Awake() {
         player = GetComponent<KitchenPlayer>();
     }
