@@ -12,6 +12,7 @@ public class LXCharacterSelectReady : MonoBehaviourPunCallbacks
     
     [SerializeField] private Button readyButton;
     [SerializeField] private Button startGameButton;
+    [SerializeField] private Button backButton;
 
     public event EventHandler OnReadyChanged;
 
@@ -29,7 +30,11 @@ public class LXCharacterSelectReady : MonoBehaviourPunCallbacks
     {
         readyButton.onClick.AddListener(SetPlayerReady);
         startGameButton.onClick.AddListener(StartGame);
-        
+
+        backButton.onClick.AddListener(() => {
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
+
         UpdateUI();
     }
 

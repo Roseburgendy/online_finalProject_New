@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 using Photon.Pun;
 
 public class LXGameTimePanel : MonoBehaviourPun
 {
     [SerializeField] private Text timeText;
     [SerializeField] private float timeRemaining = 240f;
+    public float TimeRemaining => timeRemaining; // 只读属性
 
     [Header("结算界面")]
     [SerializeField] private GameObject scoringPanel;
@@ -23,20 +26,38 @@ public class LXGameTimePanel : MonoBehaviourPun
     [SerializeField] private int starRThreshold = 60;
     [SerializeField] private int starMThreshold = 80;
 
+    [Header("爆分提示 UI")]
+    [SerializeField] private GameObject doubleScoreTipRoot; 
+    [SerializeField] private float tipDuration = 3f;
+    [SerializeField] private float tipScaleTime = 0.3f;
+
+
     [Header("回家是最好的礼物")]
     [SerializeField] private Button playBackButton;
 
-    private bool gameEnded = false;
+    [Header("音乐起")]
+    [SerializeField] private AudioSource localSource;
+    [SerializeField] private AudioClip gameWinClip;
+    [SerializeField] private AudioClip countdownClip;
 
+    private bool gameEnded = false;
+    private bool hasPlayedCountdown = false;
+    private bool doubleScoreAnnounced = false;
+
+    public static LXGameTimePanel Instance { get; private set; }
 
     private void Awake()
     {
+        Instance = this;
+
         playBackButton.onClick.AddListener(() => {
             Loader.Load(Loader.Scene.LXXCharacterSelectScene);
         });
 
         Time.timeScale = 1f;
     }
+
+
 
     private void Start()
     {
@@ -58,6 +79,20 @@ public class LXGameTimePanel : MonoBehaviourPun
             timeRemaining -= Time.deltaTime;
             timeRemaining = Mathf.Max(0, timeRemaining);
             photonView.RPC(nameof(SyncTimeDisplay), RpcTarget.All, timeRemaining);
+
+            // 触发倒数 60 秒提示
+            if (!doubleScoreAnnounced && timeRemaining <= 60f)
+            {
+                doubleScoreAnnounced = true;
+                photonView.RPC(nameof(ShowDoubleScoreTip), RpcTarget.All);
+            }
+
+            if (!hasPlayedCountdown && timeRemaining <= 4f)
+            {
+                hasPlayedCountdown = true;
+                photonView.RPC(nameof(PlayCountdownSound), RpcTarget.All);
+            }
+
 
             if (timeRemaining <= 0f)
             {
@@ -115,5 +150,54 @@ public class LXGameTimePanel : MonoBehaviourPun
 
         if (star_M_lighten != null)
             star_M_lighten.SetActive(score >= starMThreshold);
+
+        localSource.PlayOneShot(gameWinClip);
     }
+    [PunRPC]
+    private void PlayCountdownSound()
+    {
+        if (localSource != null && countdownClip != null)
+        {
+            localSource.PlayOneShot(countdownClip);
+        }
+    }
+
+    [PunRPC]
+    private void ShowDoubleScoreTip()
+    {
+        if (doubleScoreTipRoot != null)
+        {
+            doubleScoreTipRoot.SetActive(true);
+
+            // 重置为不可见（缩放为0）
+            doubleScoreTipRoot.transform.localScale = Vector3.zero;
+
+            // 开始放大动画
+            StartCoroutine(AnimateTipShow());
+        }
+    }
+
+
+    private IEnumerator AnimateTipShow()
+    {
+        float timer = 0f;
+
+        while (timer < tipScaleTime)
+        {
+            timer += Time.deltaTime;
+            float t = timer / tipScaleTime;
+            float scale = Mathf.SmoothStep(0f, 1f, t);
+            doubleScoreTipRoot.transform.localScale = new Vector3(scale, scale, scale);
+            yield return null;
+        }
+
+        doubleScoreTipRoot.transform.localScale = Vector3.one;
+
+        // 停留一定时间后隐藏
+        yield return new WaitForSeconds(tipDuration);
+
+        doubleScoreTipRoot.SetActive(false);
+    }
+
+
 }

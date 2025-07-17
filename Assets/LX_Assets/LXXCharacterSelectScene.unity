@@ -2200,7 +2200,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 527173577}
+  - {fileID: 6345068287484070996}
   - {fileID: 6345068285963390986}
   - {fileID: 1541942510}
   - {fileID: 671353352}
@@ -5715,7 +5715,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e9e932d740ced6e43a6253542a11dacf, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10808,12 +10807,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03c5368c7be40214fa3a01aacee231d0, type: 3}
---- !u!224 &527173577 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6345068287775837084, guid: 03c5368c7be40214fa3a01aacee231d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 527173576}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &530796511
 GameObject:
   m_ObjectHideFlags: 0
@@ -32626,6 +32619,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &125917592389486158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 125917592202576262, guid: 03c5368c7be40214fa3a01aacee231d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 527173576}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &125917594149280272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48832,6 +48837,12 @@ RectTransform:
   m_AnchoredPosition: {x: 836, y: 435}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &6345068287484070996 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6345068287775837084, guid: 03c5368c7be40214fa3a01aacee231d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 527173576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6418016684130703264
 Transform:
   m_ObjectHideFlags: 0
@@ -54568,6 +54579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyButton: {fileID: 125917594149280272}
   startGameButton: {fileID: 203292963}
+  backButton: {fileID: 125917592389486158}
 --- !u!4 &8529068124382567609
 Transform:
   m_ObjectHideFlags: 0

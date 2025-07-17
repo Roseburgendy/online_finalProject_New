@@ -4,16 +4,36 @@ using Photon.Pun;
 
 public class LXRecipe : MonoBehaviourPun
 {
-    public float countdownDuration = 60f;
+    [SerializeField] private float countdownDuration = 60f;
 
     private float timeLeft;
     private Image timerImage;
     private bool isCompleted = false;
+    [SerializeField] private int reward = 10;
+
+    [Header("音乐起")]
+    [SerializeField] private AudioSource localSource;
+    [SerializeField] private AudioClip successDeliveryClip;
+    [SerializeField] private AudioClip failDeliveryClip;
 
     private void Start()
     {
         timerImage = transform.Find("TimerCircle")?.GetComponent<Image>();
         timeLeft = countdownDuration;
+
+        if (localSource == null)
+        {
+            GameObject musicManager = GameObject.Find("MusicManager");
+            if (musicManager != null)
+            {
+                localSource = musicManager.GetComponent<AudioSource>();
+            }
+
+            if (localSource == null)
+            {
+                Debug.LogWarning("找不到 MusicManager 或者它没有 AudioSource！");
+            }
+        }
 
         // 只有 MasterClient 并且是本地生成的对象才注册
         if (PhotonNetwork.IsMasterClient && photonView.IsMine)
@@ -79,7 +99,8 @@ public class LXRecipe : MonoBehaviourPun
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                LXScoreManager.Instance.BroadcastScore(-5);
+                LXScoreManager.Instance.BroadcastScore(-reward/2);
+                localSource.PlayOneShot(failDeliveryClip);
             }
         }
 
@@ -103,13 +124,26 @@ public class LXRecipe : MonoBehaviourPun
 
         isCompleted = true;
 
-        int reward = 10;
-        if (timeLeft >= 40f) reward = 20;
-        else if (timeLeft >= 20f) reward = 15;
+        int finalReward = reward; // 保留原始 reward 变量不变
+
+        // 根据剩余时间动态加分
+        if (timeLeft >= countdownDuration / 2f)
+            finalReward += reward / 2;
+        else if (timeLeft >= countdownDuration / 4f)
+            finalReward += reward / 4;
+
+        // 最后 60 秒加倍奖励
+        if (LXGameTimePanel.Instance != null && LXGameTimePanel.Instance.TimeRemaining <= 60f)
+        {
+            finalReward *= 2;
+        }
+
+
+        localSource.PlayOneShot(successDeliveryClip);
 
         if (PhotonNetwork.IsMasterClient)
         {
-            LXScoreManager.Instance.BroadcastScore(reward);
+            LXScoreManager.Instance.BroadcastScore(finalReward);
         }
 
         //只销毁当前对象，不误伤其他订单

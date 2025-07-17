@@ -128,7 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bde2ed142f0a524b914a1fef6a76040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownDuration: 8
+  countdownDuration: 60
+  reward: 20
+  localSource: {fileID: 0}
+  successDeliveryClip: {fileID: 8300000, guid: 13199fc756309af41aee70a026b8ae5e, type: 3}
+  failDeliveryClip: {fileID: 8300000, guid: 72ddf1c415cdb82498e76789483412df, type: 3}
 --- !u!114 &431280984137155619
 MonoBehaviour:
   m_ObjectHideFlags: 0
