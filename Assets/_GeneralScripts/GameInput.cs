@@ -2,21 +2,23 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameInput : MonoBehaviour
-{
+public class GameInput : MonoBehaviour {
+
 
     private const string PLAYER_PREFS_BINDINGS = "InputBindings";
 
+
     public static GameInput Instance { get; private set; }
+
+
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
     public event EventHandler OnPauseAction;
-    public event EventHandler OnResumeAction;
     public event EventHandler OnBindingRebind;
 
-    public enum Binding
-    {
+
+    public enum Binding {
         Move_Up,
         Move_Down,
         Move_Left,
@@ -24,23 +26,22 @@ public class GameInput : MonoBehaviour
         Interact,
         InteractAlternate,
         Pause,
-        Resume,
         Gamepad_Interact,
         Gamepad_InteractAlternate,
-        Gamepad_Pause,
-        Gamepad_Resume
+        Gamepad_Pause
     }
+
 
     private PlayerInputActions playerInputActions;
 
-    private void Awake()
-    {
+
+    private void Awake() {
         Instance = this;
+
 
         playerInputActions = new PlayerInputActions();
 
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS))
-        {
+        if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS)) {
             playerInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_PREFS_BINDINGS));
         }
 
@@ -49,51 +50,38 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
-        playerInputActions.Player.Resume.performed += Resume_performed;
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         playerInputActions.Player.Interact.performed -= Interact_performed;
         playerInputActions.Player.InteractAlternate.performed -= InteractAlternate_performed;
         playerInputActions.Player.Pause.performed -= Pause_performed;
-        playerInputActions.Player.Resume.performed -= Resume_performed;
 
         playerInputActions.Dispose();
     }
 
-    private void Pause_performed(InputAction.CallbackContext obj)
-    {
-        Debug.Log("GameInput: ESC or Start pressed ¡ú Pause triggered");
+    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnPauseAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Resume_performed(InputAction.CallbackContext obj)
-    {
-        Debug.Log("GameInput: E or A pressed ¡ú Resume triggered");
-        OnResumeAction?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Interact_performed(InputAction.CallbackContext obj)
-    {
-        OnInteractAction?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void InteractAlternate_performed(InputAction.CallbackContext obj)
-    {
+    private void InteractAlternate_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnInteractAlternateAction?.Invoke(this, EventArgs.Empty);
     }
 
-    public Vector2 GetMovementVectorNormalized()
-    {
-        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-        return inputVector.normalized;
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
-    public string GetBindingText(Binding binding)
-    {
-        switch (binding)
-        {
+    public Vector2 GetMovementVectorNormalized() {
+        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+
+        inputVector = inputVector.normalized;
+
+        return inputVector;
+    }
+
+    public string GetBindingText(Binding binding) {
+        switch (binding) {
             default:
             case Binding.Move_Up:
                 return playerInputActions.Player.Move.bindings[1].ToDisplayString();
@@ -109,28 +97,22 @@ public class GameInput : MonoBehaviour
                 return playerInputActions.Player.InteractAlternate.bindings[0].ToDisplayString();
             case Binding.Pause:
                 return playerInputActions.Player.Pause.bindings[0].ToDisplayString();
-            case Binding.Resume:
-                return playerInputActions.Player.Resume.bindings[0].ToDisplayString();
             case Binding.Gamepad_Interact:
                 return playerInputActions.Player.Interact.bindings[1].ToDisplayString();
             case Binding.Gamepad_InteractAlternate:
                 return playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString();
             case Binding.Gamepad_Pause:
                 return playerInputActions.Player.Pause.bindings[1].ToDisplayString();
-            case Binding.Gamepad_Resume:
-                return playerInputActions.Player.Resume.bindings[1].ToDisplayString();
         }
     }
 
-    public void RebindBinding(Binding binding, Action onActionRebound)
-    {
+    public void RebindBinding(Binding binding, Action onActionRebound) {
         playerInputActions.Player.Disable();
 
         InputAction inputAction;
         int bindingIndex;
 
-        switch (binding)
-        {
+        switch (binding) {
             default:
             case Binding.Move_Up:
                 inputAction = playerInputActions.Player.Move;
@@ -160,10 +142,6 @@ public class GameInput : MonoBehaviour
                 inputAction = playerInputActions.Player.Pause;
                 bindingIndex = 0;
                 break;
-            case Binding.Resume:
-                inputAction = playerInputActions.Player.Resume;
-                bindingIndex = 0;
-                break;
             case Binding.Gamepad_Interact:
                 inputAction = playerInputActions.Player.Interact;
                 bindingIndex = 1;
@@ -174,10 +152,6 @@ public class GameInput : MonoBehaviour
                 break;
             case Binding.Gamepad_Pause:
                 inputAction = playerInputActions.Player.Pause;
-                bindingIndex = 1;
-                break;
-            case Binding.Gamepad_Resume:
-                inputAction = playerInputActions.Player.Resume;
                 bindingIndex = 1;
                 break;
         }
@@ -195,4 +169,5 @@ public class GameInput : MonoBehaviour
             })
             .Start();
     }
+
 }
