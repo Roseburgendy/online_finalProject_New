@@ -51,11 +51,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: d4c12336d2b47ef4b92e9aa977db4a37, type: 2}
   validKitchenObjectSOList:
+  - {fileID: 11400000, guid: db5cb59d1315fa540a4bf50a406bbf9f, type: 2}
   - {fileID: 11400000, guid: 841c4737b94d47d4d94672cc899985c5, type: 2}
   - {fileID: 11400000, guid: cf8f4ee192a0e3e479300597f7dff9b8, type: 2}
   - {fileID: 11400000, guid: 59e1a8de575a49340b05a12c4b1d5e5d, type: 2}
   - {fileID: 11400000, guid: a3fa5826da638ca49833313b4e8e38ea, type: 2}
-  - {fileID: 11400000, guid: db5cb59d1315fa540a4bf50a406bbf9f, type: 2}
   - {fileID: 11400000, guid: 0040f12a97331db4b8e1cab5e75cea81, type: 2}
 --- !u!114 &-2948320626480514293
 MonoBehaviour:

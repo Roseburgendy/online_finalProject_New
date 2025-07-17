@@ -2,20 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-public class CharacterSelectUI : MonoBehaviour {
+public class CharacterSelectUI : MonoBehaviourPunCallbacks {
 
 
     [SerializeField] private Button mainMenuButton;
-    [SerializeField] private Button readyButton;
     [SerializeField] private TextMeshProUGUI lobbyNameText;
-    [SerializeField] private TextMeshProUGUI lobbyCodeText;
+    //[SerializeField] private TextMeshProUGUI lobbyCodeText;
 
 
     private void Awake() {
         mainMenuButton.onClick.AddListener(() => {
-            //KitchenGameLobby.Instance.LeaveLobby();
-           // NetworkManager.Singleton.Shutdown();
-            // Leave lobby and return to options panel
             if (PhotonNetwork.InRoom)
             {
                 PhotonNetwork.LeaveRoom();
@@ -26,17 +22,13 @@ public class CharacterSelectUI : MonoBehaviour {
             }
             else
             {
+                PhotonNetwork.Disconnect(); // 断开 Photon 网络连接
                 Loader.Load(Loader.Scene.MainMenuScene);
             }
-            
-        });
-        readyButton.onClick.AddListener(() => {
-            CharacterSelectReady.Instance.SetPlayerReady();
         });
     }
-
-    private void Start() {
-        //Lobby lobby = KitchenGameLobby.Instance.GetLobby();
+    
+    public override void OnJoinedRoom() {
         lobbyNameText.text = "Lobby Name: " + PhotonNetwork.CurrentRoom.Name;
     }
 }

@@ -157,7 +157,8 @@ public class NetworkManager_wy : MonoBehaviourPunCallbacks
     }
     public void OnBackToMenuButtonClicked()
     {
-        Loader.Load(Loader.Scene.MainMenuScene);
+        PhotonNetwork.Disconnect(); // 断开 Photon 网络连接
+        Loader.Load(Loader.Scene.MainMenuScene); // 返回主菜单
     }
 
     

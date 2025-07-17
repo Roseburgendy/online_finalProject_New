@@ -10,7 +10,7 @@ public class PlatesCounter : BaseCounter
     [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
 
     private float spawnPlateTimer;
-    private float spawnPlateTimerMax = 4f;
+    private float spawnPlateTimerMax = 5f;
     private int platesSpawnedAmount;
     private int platesSpawnedAmountMax = 4;
 
@@ -24,13 +24,12 @@ public class PlatesCounter : BaseCounter
     private void Update()
     {
         if (!PhotonNetwork.IsMasterClient) return;
-
         spawnPlateTimer += Time.deltaTime;
         if (spawnPlateTimer > spawnPlateTimerMax)
         {
             spawnPlateTimer = 0f;
 
-            if (KitchenGameManager.Instance.IsGamePlaying() && platesSpawnedAmount < platesSpawnedAmountMax)
+            if (platesSpawnedAmount < platesSpawnedAmountMax)
             {
                 photonView.RPC(nameof(RPC_SpawnPlate), RpcTarget.All);
             }

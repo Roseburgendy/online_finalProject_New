@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1778288183289012027}
-  - component: {fileID: 495065039973235350}
   - component: {fileID: 2834930810448598238}
   - component: {fileID: 7090808205160057262}
   - component: {fileID: 5558972251162380437}
@@ -36,27 +35,6 @@ Transform:
   - {fileID: 8148595781254472541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &495065039973235350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793094337483793349}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2022258695
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &2834930810448598238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18731aba0ca038f48a00d868ac09e5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenObjectSO: {fileID: 11400000, guid: dc7206a372e873e44945cb9155f8c1ba, type: 2}
+  kitchenObjectSO: {fileID: 11400000, guid: db5cb59d1315fa540a4bf50a406bbf9f, type: 2}
 --- !u!114 &7090808205160057262
 MonoBehaviour:
   m_ObjectHideFlags: 0
