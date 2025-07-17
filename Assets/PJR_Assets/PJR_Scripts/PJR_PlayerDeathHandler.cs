@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PJR_PlayerDeathHandler : MonoBehaviourPun
 {
     private bool isDead = false;
@@ -11,7 +11,9 @@ public class PJR_PlayerDeathHandler : MonoBehaviourPun
 
     [SerializeField] public GameObject diePanel;
     [SerializeField] public float DieTime;
-
+    [SerializeField] private Animator animator;
+    
+    [SerializeField] private Text countdownText; 
     private void Start()
     {
         if (!photonView.IsMine)
@@ -40,34 +42,45 @@ public class PJR_PlayerDeathHandler : MonoBehaviourPun
     {
         isDead = true;
 
-        // ÏÔÊ¾ËÀÍöÃæ°å
+        // æ’­æ”¾æ­»äº¡åŠ¨ç”»
+        if (animator != null)
+            animator.SetTrigger("Die");
+
+        // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (diePanel != null)
             diePanel.SetActive(true);
 
-        // ½ûÓÃ¿ØÖÆ½Å±¾
+        // ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Æ½Å±ï¿½
         if (movementScript != null)
             movementScript.enabled = false;
 
-        StartCoroutine(RespawnAfterDelay(DieTime));
+        StartCoroutine(CountdownAndRespawn(DieTime));
     }
 
-    IEnumerator RespawnAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
 
-        // Òş²ØËÀÍöÃæ°å
+    IEnumerator CountdownAndRespawn(float delay)
+    {
+        float timeLeft = delay;
+
+        while (timeLeft > 0)
+        {
+            if (countdownText != null)
+                countdownText.text = $"Respawning in: {Mathf.CeilToInt(timeLeft)}s";
+            yield return new WaitForSeconds(1f);
+            timeLeft -= 1f;
+        }
+
+        if (countdownText != null)
+            countdownText.text = "";
+
         if (diePanel != null)
             diePanel.SetActive(false);
 
-        // ÖØĞÂÆôÓÃ¿ØÖÆ½Å±¾£¨²»Ò»¶¨ÓĞÒâÒå£¬ÒòÎª´Ë¶ÔÏóÂíÉÏÏú»Ù£¬µ«·ÀÖ¹²ĞÁô£©
         if (movementScript != null)
             movementScript.enabled = true;
 
-        // Ö÷¶¯Ïú»Ùµ±Ç°Íæ¼Ò£¨ÈÃÆäËûÈËÒ²ÄÜ¿´µ½Äã±»ÒÆ³ı£©
         PhotonNetwork.Destroy(gameObject);
-
-        // µ÷ÓÃÉú³ÉĞÂÍæ¼ÒµÄÂß¼­
         LXGameSceneManager.Instance.RespawnPlayer();
-
     }
+
 }

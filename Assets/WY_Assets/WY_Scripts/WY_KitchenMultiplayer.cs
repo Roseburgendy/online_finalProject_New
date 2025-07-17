@@ -21,6 +21,7 @@ public class WY_KitchenGameMultiplayer : MonoBehaviourPunCallbacks
 
         KitchenObject kitchenObject = instance.GetComponent<KitchenObject>();
         kitchenObject.SetKitchenObjectParent(parent);
+        
     }
 
     public static void DestroyKitchenObject(KitchenObject kitchenObject)

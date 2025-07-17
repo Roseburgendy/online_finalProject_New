@@ -25,7 +25,7 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
     [SerializeField] private LayerMask collisionsLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
     [SerializeField] private PlayerVisual playerVisual;
-
+    [SerializeField] private Animator animator; // 绑定 Animator 组件
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
@@ -51,6 +51,7 @@ public class PJR_PlayerMovement : MonoBehaviourPun, IKitchenObjectParent
 
         HandleMovement();
         HandleInteractions();
+        animator.SetBool("isWalking", isWalking); // 动画控制
     }
 
     public bool IsWalking()
