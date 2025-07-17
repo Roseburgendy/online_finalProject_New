@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 9646a184-7ce2-4a95-897c-0fb286d9af4d
+    AppIdRealtime: d75746bf-dcdb-4732-937e-fedc8435fccb
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: asia
+    FixedRegion: 
     Server: 
     Port: 0
     ProxyServer: 
@@ -59,7 +59,8 @@ MonoBehaviour:
   - ShowDoubleScoreTip
   - RPC_RemovePlate
   - RPC_SpawnPlate
-  - RPC_SetTarget
+  - RPC_GivePlateToPlayer
+  - RPC_SetKitchenObjectParent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

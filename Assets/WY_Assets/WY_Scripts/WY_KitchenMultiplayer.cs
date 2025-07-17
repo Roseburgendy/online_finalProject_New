@@ -14,13 +14,14 @@ public class WY_KitchenGameMultiplayer : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
     }
 
-    public static void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent parent)
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent parent)
     {
         GameObject prefab = kitchenObjectSO.prefab;
         GameObject instance = PhotonNetwork.Instantiate(prefab.name, parent.GetKitchenObjectFollowTransform().position, Quaternion.identity);
 
         KitchenObject kitchenObject = instance.GetComponent<KitchenObject>();
         kitchenObject.SetKitchenObjectParent(parent);
+        return kitchenObject;
     }
 
     public static void DestroyKitchenObject(KitchenObject kitchenObject)
