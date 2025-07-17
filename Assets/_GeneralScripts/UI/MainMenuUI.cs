@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour {
+public class MainMenuUI : MonoBehaviourPunCallbacks {
 
 
     [SerializeField] private Button playMultiplayerButton;
@@ -16,8 +17,11 @@ public class MainMenuUI : MonoBehaviour {
         playMultiplayerButton.onClick.AddListener(() => {
             Loader.Load(Loader.Scene.LobbyScene);
         });
-        playSingleplayerButton.onClick.AddListener(() => {
-            Loader.Load(Loader.Scene.LobbyScene);
+        playSingleplayerButton.onClick.AddListener(() =>
+        {
+            StartSinglePlayerGame();
+
+            Loader.Load(Loader.Scene.LXXCharacterSelectScene);
         });
         backButton.onClick.AddListener(() => {
             Loader.Load(Loader.Scene.TitleScene);
@@ -25,5 +29,9 @@ public class MainMenuUI : MonoBehaviour {
 
         Time.timeScale = 1f;
     }
-
+    public void StartSinglePlayerGame()
+    {
+        PhotonNetwork.OfflineMode = true; 
+        PhotonNetwork.CreateRoom("OfflineRoom"); 
+    }
 }
