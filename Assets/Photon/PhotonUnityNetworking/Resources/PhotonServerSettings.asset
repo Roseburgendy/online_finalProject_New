@@ -62,6 +62,8 @@ MonoBehaviour:
   - RPC_GivePlateToPlayer
   - RPC_SetKitchenObjectParent
   - RPC_SetTarget
+  - RPC_ShowFailFeedback
+  - RPC_ShowSuccessFeedback
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
