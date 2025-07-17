@@ -909,11 +909,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: e8d792b8-9af0-45bf-bf44-f1c7fa8b9a65
+  cloudProjectId: c03483a9-61f7-469f-862b-3c1eda24170c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Kitchen Chaos Multiplayer
-  organizationId: hugo-cardoso
+  organizationId: tomoyocing
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

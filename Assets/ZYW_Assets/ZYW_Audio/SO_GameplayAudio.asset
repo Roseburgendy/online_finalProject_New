@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603979d10c04e12489723d7f97422218, type: 3}
   m_Name: SO_GameplayAudio
   m_EditorClassIdentifier: 
+  countdown:
+  - {fileID: 8300000, guid: 87c8d456a0da61542ba07d4316c8f8bc, type: 3}
   chop:
   - {fileID: 8300000, guid: 19b4d144f8247734c93eec4f7c22f784, type: 3}
   deliveryFail:

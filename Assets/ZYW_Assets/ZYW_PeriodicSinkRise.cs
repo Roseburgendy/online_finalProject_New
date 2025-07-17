@@ -18,9 +18,7 @@ public class ZYW_PeriodicSinkRise : MonoBehaviour
     [Tooltip("SinkingDepth")]
     public float sinkDepth = 2.7f;
 
-    [Header("Audio ( AudioSource play)")]
-    [SerializeField] private AudioSource localSource;       // 在 Inspector 拖入
-    [SerializeField] private AudioClip deliverySuccessClip; // 在 Inspector 拖入 delivery_success.wav
+    
 
     private Vector3 _startLocalPos;
 
@@ -47,11 +45,7 @@ public class ZYW_PeriodicSinkRise : MonoBehaviour
             // 1）顶部停留
             yield return new WaitForSeconds(stayDuration);
 
-            // —— 在开始下沉前播放“delivery success”音效 —— 
-            if (localSource != null && deliverySuccessClip != null)
-            {
-                localSource.PlayOneShot(deliverySuccessClip);
-            }
+           
 
             // 2）下沉
             yield return LerpPosition(
