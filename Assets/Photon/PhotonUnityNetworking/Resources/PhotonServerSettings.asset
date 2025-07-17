@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: hk
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -43,6 +43,18 @@ MonoBehaviour:
   - RPC_AddIngredient
   - RPC_SetParent
   - RPC_UpdateState
+  - SyncTimeDisplay
+  - RPC_SpawnRecipe
+  - DestroyRecipe
+  - UpdateTime
+  - AttachToUI
+  - Initialize
+  - RPC_AddScore
+  - RequestCompleteOrder
+  - RequestOrderComplete
+  - SyncScore
+  - SyncDestroy
+  - EndGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1
