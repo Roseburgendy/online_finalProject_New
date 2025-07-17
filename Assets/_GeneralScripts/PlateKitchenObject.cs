@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlateKitchenObject : KitchenObject, IPunObservable
+public class PlateKitchenObject : KitchenObject
 {
     public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
     public class OnIngredientAddedEventArgs : EventArgs
@@ -57,60 +57,5 @@ public class PlateKitchenObject : KitchenObject, IPunObservable
     public List<KitchenObjectSO> GetKitchenObjectSOList()
     {
         return kitchenObjectSOList;
-    }
-    
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // 发送盘子上的配料列表
-            stream.SendNext(kitchenObjectSOList.Count);
-            foreach (var ingredient in kitchenObjectSOList)
-            {
-                stream.SendNext(WY_KitchenGameMultiplayer.Instance.GetKitchenObjectSOIndex(ingredient));
-            }
-        
-            // 发送当前位置和旋转
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-        }
-        else
-        {
-            // 接收配料列表
-            kitchenObjectSOList.Clear();
-            int count = (int)stream.ReceiveNext();
-            for (int i = 0; i < count; i++)
-            {
-                int index = (int)stream.ReceiveNext();
-                var ingredient = WY_KitchenGameMultiplayer.Instance.GetKitchenObjectSOFromIndex(index);
-                kitchenObjectSOList.Add(ingredient);
-            }
-        
-            // 接收位置和旋转
-            Vector3 networkPosition = (Vector3)stream.ReceiveNext();
-            Quaternion networkRotation = (Quaternion)stream.ReceiveNext();
-        
-            // 如果不是本地对象，应用网络位置
-            if (!photonView.IsMine)
-            {
-                transform.position = networkPosition;
-                transform.rotation = networkRotation;
-            }
-        
-            // 更新视觉表现
-            UpdateVisuals();
-        }
-    }
-
-    private void UpdateVisuals()
-    {
-        // 触发所有添加事件来更新视觉表现
-        foreach (var ingredient in kitchenObjectSOList)
-        {
-            OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs
-            {
-                kitchenObjectSO = ingredient
-            });
-        }
     }
 }
