@@ -20,18 +20,12 @@ public class CharacterSelectUI : MonoBehaviourPunCallbacks {
             {
                 PhotonNetwork.LeaveLobby();
             }
-            else if (PhotonNetwork.IsConnected)
+            else
             {
                 PhotonNetwork.Disconnect(); // 断开 Photon 网络连接
                 Loader.Load(Loader.Scene.MainMenuScene);
             }
-            else
-            {
-                // 如果本来就没有连接 Photon，直接跳主菜单
-                Loader.Load(Loader.Scene.MainMenuScene);
-            }
         });
-
     }
     
     public override void OnJoinedRoom() {
