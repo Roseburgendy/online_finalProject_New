@@ -16,6 +16,8 @@ public class PJR_PlayerDeathHandler : MonoBehaviourPun
     [SerializeField] private Text countdownText; 
     private void Start()
     {
+        Debug.Log($"[{PhotonNetwork.NickName}] photonView.IsMine = {photonView.IsMine}");
+
         if (!photonView.IsMine)
         {
             if (diePanel != null)

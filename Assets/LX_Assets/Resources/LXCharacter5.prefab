@@ -5859,7 +5859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51700081d480ea4fba263b9a824b225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diePanel: {fileID: 2606253698393258171}
+  diePanel: {fileID: 316704149860650605}
   DieTime: 3
   animator: {fileID: 6261708960881099089}
   countdownText: {fileID: 606919723316632477}
