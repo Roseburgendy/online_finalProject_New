@@ -111,14 +111,7 @@ public class KitchenObject : MonoBehaviourPun {
     }
 
     // Static helper method to destroy the kitchen object
-    public static void DestroyKitchenObject(KitchenObject kitchenObject)
-    {
-        if (!kitchenObject.photonView.IsMine)
-        {
-            kitchenObject.photonView.RequestOwnership();
-        }
-
+    public static void DestroyKitchenObject(KitchenObject kitchenObject) {
         kitchenObject.DestroySelf();
     }
-
 }

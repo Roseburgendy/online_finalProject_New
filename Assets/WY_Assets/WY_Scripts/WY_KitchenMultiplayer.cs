@@ -14,7 +14,6 @@ public class WY_KitchenGameMultiplayer : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
     }
 
-
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent parent)
     {
         GameObject prefab = kitchenObjectSO.prefab;
