@@ -147,17 +147,17 @@ PrefabInstance:
     - target: {fileID: 6469687145593214519, guid: ac964a67cdc32584aab07a6cd2fe1b21,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6469687145593214519, guid: ac964a67cdc32584aab07a6cd2fe1b21,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6469687145593214519, guid: ac964a67cdc32584aab07a6cd2fe1b21,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6469687145593214519, guid: ac964a67cdc32584aab07a6cd2fe1b21,
         type: 3}
@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 147447561114045681}
+  successUIPanel: {fileID: 0}
+  failureUIPanel: {fileID: 0}
 --- !u!114 &3644717749250780313
 MonoBehaviour:
   m_ObjectHideFlags: 0
