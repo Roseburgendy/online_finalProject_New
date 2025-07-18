@@ -99,7 +99,7 @@ public class LXRecipe : MonoBehaviourPun
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                LXScoreManager.Instance.BroadcastScore(-reward/2);
+                LXScoreManager.Instance.BroadcastScore(-reward / 2);
                 localSource.PlayOneShot(failDeliveryClip);
             }
         }
@@ -159,11 +159,11 @@ public class LXRecipe : MonoBehaviourPun
     }
 
     // 简单示例匹配逻辑，可自定义逻辑（你也可以传入自定义数据类型）
-/*    public bool Matches(KitchenObject burger)
-    {
-        // 示例：订单名称中包含 "Burger"，且 burger 是汉堡类型
-        return burger != null && burger.GetKitchenObjectSO().objectName.Contains("Burger");
-    }*/
+    /*    public bool Matches(KitchenObject burger)
+        {
+            // 示例：订单名称中包含 "Burger"，且 burger 是汉堡类型
+            return burger != null && burger.GetKitchenObjectSO().objectName.Contains("Burger");
+        }*/
 
     [PunRPC]
     public void AttachToUI(int containerViewID)
