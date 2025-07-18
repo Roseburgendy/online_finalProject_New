@@ -15,36 +15,54 @@ public class DeliveryCounter : BaseCounter
 
     private bool PlateMatchesRecipe(PlateKitchenObject plate)
     {
+        var ingredients = plate.GetKitchenObjectSOList();
+
+        Debug.Log("检测配料开始：");
+        foreach (var ing in ingredients)
+        {
+            Debug.Log($"配料：{ing.objectName}");
+        }
+
         bool hasBottomBun = false;
         bool hasTomato = false;
         bool hasLettuce = false;
         bool hasCheese = false;
         bool hasMeat = false;
 
-        foreach (KitchenObjectSO ingredient in plate.GetKitchenObjectSOList())
+        foreach (KitchenObjectSO ingredient in ingredients)
         {
             switch (ingredient.objectName)
             {
                 case "Bread": hasBottomBun = true; break;
-                case "TomatoSlices": hasTomato = true; break;
-                case "CabbageSlices": hasLettuce = true; break;
-                case "CheeseSlices": hasCheese = true; break;
-                case "MeatPattyCooked": hasMeat = true; break;
+                case "Tomato Slices": hasTomato = true; break;
+                case "Cabbage Slices": hasLettuce = true; break;
+                case "Cheese Slices": hasCheese = true; break;
+                case "Meat Patty Cooked": hasMeat = true; break;
+                default:
+                    Debug.LogWarning($"未知配料：{ingredient.objectName}");
+                    break;
             }
+
         }
+
+        Debug.Log($"配料检测结果 => 面包:{hasBottomBun}，番茄:{hasTomato}，生菜:{hasLettuce}，芝士:{hasCheese}，肉:{hasMeat}");
 
         return hasBottomBun && hasTomato && hasLettuce && hasCheese && hasMeat;
     }
+
 
     public override void Interact(IKitchenObjectParent player)
     {
         if (player.HasKitchenObject())
         {
+            Debug.Log("卡在第1步");
             if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
             {
+                Debug.Log("卡在第2步");
                 // 检查盘子配料是否满足订单
                 if (PlateMatchesRecipe(plateKitchenObject))
                 {
+                    Debug.Log("卡在第3步");
                     // 使用 LXRecipeManager 完成订单（Photon RPC）
                     PhotonView photonView = PhotonView.Get(this);
                     if (photonView != null)
@@ -79,10 +97,16 @@ public class DeliveryCounter : BaseCounter
     {
         if (successUIPanel != null)
         {
+            Debug.Log("显示成功UI");
             successUIPanel.SetActive(true);
             Invoke(nameof(HideSuccessUI), 5f);
         }
+        else
+        {
+            Debug.LogWarning("successUIPanel 未绑定！");
+        }
     }
+
 
     private void HideSuccessUI()
     {
