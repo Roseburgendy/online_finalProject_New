@@ -23,21 +23,31 @@ public class PlateKitchenObject : KitchenObject, IPunObservable
 
     public bool TryAddIngredient(KitchenObjectSO kitchenObjectSO)
     {
-        if (!validKitchenObjectSOList.Contains(kitchenObjectSO))
+        if (!photonView.IsMine)
         {
-            // Not a valid ingredient
-            return false;
+            // 如果当前不是 Owner，请求 Owner 来添加
+            int index = WY_KitchenGameMultiplayer.Instance.GetKitchenObjectSOIndex(kitchenObjectSO);
+            photonView.RPC(nameof(RequestAddIngredientRPC), photonView.Owner, index);
+            return false; // 非 Owner 不处理，等待 Owner 来广播
         }
 
-        if (kitchenObjectSOList.Contains(kitchenObjectSO))
-        {
-            // Already added
-            return false;
-        }
+        return TryAddIngredient_Internal(kitchenObjectSO);
+    }
+
+    [PunRPC]
+    private void RequestAddIngredientRPC(int kitchenObjectSOIndex)
+    {
+        KitchenObjectSO kitchenObjectSO = WY_KitchenGameMultiplayer.Instance.GetKitchenObjectSOFromIndex(kitchenObjectSOIndex);
+        TryAddIngredient(kitchenObjectSO); // 再次走 TryAdd，因 Owner 会执行内部添加和广播
+    }
+
+    private bool TryAddIngredient_Internal(KitchenObjectSO kitchenObjectSO)
+    {
+        if (!validKitchenObjectSOList.Contains(kitchenObjectSO)) return false;
+        if (kitchenObjectSOList.Contains(kitchenObjectSO)) return false;
 
         int index = WY_KitchenGameMultiplayer.Instance.GetKitchenObjectSOIndex(kitchenObjectSO);
         photonView.RPC(nameof(RPC_AddIngredient), RpcTarget.All, index);
-
         return true;
     }
 

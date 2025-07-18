@@ -55,7 +55,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../build/HELL COOK.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../build\HELL COOK.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\ClassWork\Online Game\build" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -129,7 +129,7 @@
       <workItem from="1752739750172" duration="4705000" />
       <workItem from="1752751108899" duration="5641000" />
       <workItem from="1752762582923" duration="8075000" />
-      <workItem from="1752781432194" duration="1160000" />
+      <workItem from="1752781432194" duration="3422000" />
     </task>
     <servers />
   </component>
